@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🎨 Grafic – Portafolio de Diseño Gráfico
 
-## Getting Started
+Grafic es una plataforma profesional creada con Next.js 15, TypeScript y Tailwind CSS. Permite a diseñadores gráficos mostrar sus trabajos, conectar con clientes y gestionar contenido desde un panel de administración.
 
-First, run the development server:
+🚀 Características
 
-```bash
+✅ Portafolio dinámico con imágenes categorizadas
+
+✅ Panel de administración seguro con Supabase Auth
+
+✅ Contacto directo vía WhatsApp
+
+✅ Optimizado para SEO y rendimiento
+
+✅ Diseño moderno, responsive y profesional
+
+🛠️ Tecnologías Usadas
+
+Next.js 15
+
+TypeScript
+
+Tailwind CSS
+
+Supabase
+
+Vercel
+
+
+
+📂 Estructura del Proyecto
+app/
+ ├── marketing/       # Página pública (landing)
+ ├── designs/         # Portafolio con filtros por categoría
+ ├── admin/           # Panel protegido (CRUD imágenes)
+ ├── components/      # Componentes reutilizables
+ ├── lib/             # Configuración y utilidades
+ └── styles/          # Estilos globales
+
+
+ 🌐 SEO y Etiquetas Meta
+
+El proyecto incluye etiquetas meta para mejorar posicionamiento:
+
+<meta name="title" content="CraftyCraft17 - Portafolio de Diseño Gráfico Profesional">
+<meta name="description" content="Portafolio moderno de diseño gráfico. Logos, branding, flyers, CVs y más. Contacta directo por WhatsApp.">
+<meta name="keywords" content="diseño gráfico, branding, logos, flyers, diseño web, ilustraciones, portafolio, diseño moderno">
+<meta property="og:title" content="CraftyCraft17 - Diseño Gráfico Profesional">
+<meta property="og:description" content="Explora nuestro portafolio de diseño gráfico: logos, branding, flyers, CVs y más.">
+<meta property="og:image" content="/og-image.png">
+<meta property="og:url" content="https://craftycraft17.com">
+<meta name="twitter:card" content="summary_large_image">
+
+🚀 Cómo Ejecutarlo
+# Instalar dependencias
+npm install
+
+# Ejecutar servidor en desarrollo
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Accede en http://localhost:3000.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
