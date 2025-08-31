@@ -2,7 +2,6 @@ export const revalidate = 60;
 import BackToAdminButton from "@components/BackToAdminButton";
 import CategoryNav from "@components/CategoryNav";
 import { DesignCard } from "@components/DesignCard";
-import { WhatsappButton } from "@components/WhatAppButton";
 import { fetchPublicImages } from "@lib/fetchImg";
 import { Metadata } from "next";
 
@@ -64,7 +63,6 @@ export default async function DesignsPage() {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
             ¿Listo para transformar tu marca?
           </h2>
-          <WhatsappButton />
         </div>
       </section>
     </main>
