@@ -1,14 +1,14 @@
-import { createClient } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 export async function fetchPublicImages() {
-  const supabase =  await createClient(); // No uses await aquí
+  try {
+    const images = await prisma.image.findMany({
+      orderBy: { createdAt: "desc" },
+    });
 
-  const { data, error } = await supabase.from("images").select("*");
-
-  if (error) {
-    console.error("Error al obtener imágenes:", error.message);
+    return images;
+  } catch (error) {
+    console.error("Error al obtener imágenes:", error);
     return [];
   }
-
-  return data ?? [];
 }

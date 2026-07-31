@@ -6,13 +6,12 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { createClient } from "@lib/supabase/client";
 
-const supabase = createClient();
-
 export default function LogoutButton() {
     const [loading, setLoading] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const router = useRouter();
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const supabase = createClient();
 
     const handleLogout = async () => {
         setLoading(true);

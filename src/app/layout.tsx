@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "CraftyCraft – Diseño Gráfico",
   description: "Portfolio visual y contacto profesional",
   icons: {
-    icon: "/favicon.ico ",
+    icon: "/favicon.ico",
   },
 };
 

@@ -1,18 +1,15 @@
-// ✅ Componente: src/components/UpdatePasswordForm.tsx
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@lib/supabase/client";
 
-const supabase = createClient();
-
-
 export default function UpdatePasswordForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [info, setInfo] = useState("");
     const router = useRouter();
+    const supabase = createClient();
 
     const handleUpdatePassword = async (e: React.FormEvent) => {
         e.preventDefault();

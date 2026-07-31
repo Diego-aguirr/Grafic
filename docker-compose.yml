@@ -1,0 +1,40 @@
+services:
+  # ─── PostgreSQL ────────────────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: your-super-secret-and-long-postgres-password
+      POSTGRES_DB: grafic
+    volumes:
+      - supabase-db-data:/var/lib/postgresql/data
+      - ./supabase/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d grafic"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ─── Next.js App ───────────────────────────────────────────────
+  grafic:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    environment:
+      # Override DATABASE_URL for Docker network (use service name 'db' instead of 'localhost')
+      DATABASE_URL: postgresql://postgres:your-super-secret-and-long-postgres-password@db:5432/grafic
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  supabase-db-data:

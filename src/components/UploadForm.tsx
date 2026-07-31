@@ -1,12 +1,7 @@
 "use client";
 
 import { useState } from "react";
- 
-import { uploadImage } from "@lib/helper/upload-image";
 import { imageEvents } from "@lib/events/imgEvent";
-import { createClient } from "@lib/supabase/client";
-
-const supabase = createClient();
 
 const categories = ["Branding", "Digital", "Impresión", "Eventos", "Packaging"];
 
@@ -29,24 +24,21 @@ export default function UploadForm() {
         return;
       }
 
-      // Subir imagen a Supabase Storage
-      const publicUrl = await uploadImage(image);
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("description", description);
+      formData.append("category", category);
 
-      // Guardar en tabla 'images'
-      const { error } = await supabase.from("images").insert({
-        url: publicUrl,
-        description,
-        category,
+      const res = await fetch("/api/images/upload", {
+        method: "POST",
+        body: formData,
       });
 
-      if (error) throw error;
+      if (!res.ok) throw new Error("Error al subir la imagen");
 
-      setMessage("Imagen subida exitosamente 🎉");
-
-      // Notificamos al resto que se subió una imagen nueva
+      setMessage("Imagen subida exitosamente");
       imageEvents.dispatch();
 
-      // Limpiar campos
       setImage(null);
       setDescription("");
       setCategory("");

@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Models ─────────────────────────────────────────────────
+
+model AdminProfile {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String
+  isSuperAdmin Boolean  @default(false) @map("is_super_admin")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("admin_profiles")
+}
+
+model Image {
+  id          String   @id @default(uuid()) @db.Uuid
+  url         String
+  description String   @default("")
+  category    String   @default("")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("images")
+}

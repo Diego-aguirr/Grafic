@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 
 const ServiceCard = ({ icon, title, description }: ServiceCardProps) => {
   const handleWhatsAppClick = () => {
-    // Número de teléfono (reemplaza con tu número)
-    const phoneNumber = "1234567890";
+    const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_PHONE ?? "";
 
     // Mensaje predefinido
     const message = `¡Hola! Estoy interesado en el servicio: ${title}`;

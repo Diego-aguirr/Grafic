@@ -7,7 +7,7 @@ const categories = [
   { name: "Todos", slug: "todos" },
   { name: "Branding", slug: "branding" },
   { name: "Digital", slug: "digital" },
-  { name: "Impresión", slug: "Impresion" },
+  { name: "Impresión", slug: "impresion" },
   { name: "Eventos", slug: "eventos" },
   { name: "Packaging", slug: "packaging" },
 ];

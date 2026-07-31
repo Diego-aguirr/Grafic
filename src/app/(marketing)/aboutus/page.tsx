@@ -1,7 +1,7 @@
 import ServiceCard from "@components/ServiceCard";
 import { Metadata } from "next";
 import Image from "next/image";
-import { WhatsappButton } from "../../../components/WhatAppButton";
+import { WhatsappButton } from "@components/WhatAppButton";
 
 export const metadata: Metadata = {
   title: "Sobre Nosotros | CraftyCraft - Experiencia en Diseño Gráfico",
@@ -55,7 +55,7 @@ const AboutPage = () => {
                 <li className="flex items-start">
                   <span className="text-teal-500 mt-1 mr-3">▸</span>
                   <span className="text-gray-700">
-                    <strong>98% de satisfacción</strong> cliental
+                    <strong>98% de satisfacción</strong> clientes
                   </span>
                 </li>
               </ul>
