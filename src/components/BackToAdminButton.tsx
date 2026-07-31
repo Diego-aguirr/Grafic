@@ -10,7 +10,7 @@ export default async function BackToAdminButton() {
     } = await supabase.auth.getUser();
 
     // Verifica si el usuario logueado es el admin
-    const adminEmail = process.env.SUPABASE_ADMIN_EMAIL;
+    const adminEmail = process.env.ADMIN_EMAIL;
     const isAdmin = user?.email === adminEmail;
 
     if (!isAdmin) return null;

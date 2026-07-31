@@ -1,41 +1,39 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
- 
-import { deleteImage } from "@lib/helper/delete-image";
-import ConfirmModal from "./ui/confirModal";
+import ConfirmModal from "./ui/ConfirmModal";
 import UpdateModal from "./ui/UpdateModal";
 import { imageEvents } from "@lib/events/imgEvent";
 import Image from "next/image";
-import { createClient } from '@lib/supabase/client'
- 
 
-interface Image {
+interface ImageItem {
   id: string;
   url: string;
   description: string;
   category: string;
-  created_at: string;
+  createdAt: string;
 }
-const supabase = createClient()
 
 export default function ImageList() {
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<ImageItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<{ id: string; url: string } | null>(null);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [editingImage, setEditingImage] = useState<Image | null>(null);
+  const [editingImage, setEditingImage] = useState<ImageItem | null>(null);
 
   const fetchImages = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("images")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (!error && data) setImages(data);
-    setLoading(false);
+    try {
+      const res = await fetch("/api/images");
+      if (res.ok) {
+        const data = await res.json();
+        setImages(data);
+      }
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -51,9 +49,18 @@ export default function ImageList() {
     if (!selectedImage) return;
 
     try {
-      await deleteImage(selectedImage.id, selectedImage.url);
-      setImages((prev) => prev.filter((img) => img.id !== selectedImage.id));
-      setSelectedImage(null);
+      const res = await fetch("/api/images", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: selectedImage.id, url: selectedImage.url }),
+      });
+
+      if (res.ok) {
+        setImages((prev) => prev.filter((img) => img.id !== selectedImage.id));
+        setSelectedImage(null);
+      } else {
+        alert("Error al eliminar la imagen");
+      }
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "Error al eliminar";
       alert(errorMessage);
@@ -61,17 +68,22 @@ export default function ImageList() {
   };
 
   const handleUpdate = async (id: string, description: string, category: string) => {
-    const { error } = await supabase
-      .from("images")
-      .update({ description, category })
-      .eq("id", id);
+    try {
+      const res = await fetch("/api/images", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, description, category }),
+      });
 
-    if (error) {
+      if (res.ok) {
+        fetchImages();
+        setIsUpdateOpen(false);
+        setEditingImage(null);
+      } else {
+        alert("Error al actualizar la imagen");
+      }
+    } catch {
       alert("Error al actualizar la imagen");
-    } else {
-      fetchImages();
-      setIsUpdateOpen(false);
-      setEditingImage(null);
     }
   };
 
@@ -90,7 +102,6 @@ export default function ImageList() {
               className="w-full h-48 object-cover"
               width={300}
               height={300}
-
             />
             <div className="p-4 space-y-1">
               <p className="text-gray-800 text-sm">{img.description}</p>
@@ -117,7 +128,6 @@ export default function ImageList() {
         ))}
       </div>
 
-      {/* Modal de confirmación - CORREGIDO */}
       <ConfirmModal
         isOpen={!!selectedImage}
         onCancel={() => setSelectedImage(null)}
@@ -126,7 +136,6 @@ export default function ImageList() {
         message="¿Estás seguro de que deseas eliminar esta imagen? Esta acción no se puede deshacer."
       />
 
-      {/* Modal de edición */}
       {editingImage && (
         <UpdateModal
           isOpen={isUpdateOpen}

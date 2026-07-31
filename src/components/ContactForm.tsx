@@ -45,7 +45,7 @@ const ContactForm = () => {
           from_name: name,
           from_email: email,
           message: message,
-          to_email: "empresasrlarg@gmail.com", // Email donde recibirás los mensajes
+          to_email: process.env.NEXT_PUBLIC_CONTACT_EMAIL!,
         }
       );
 

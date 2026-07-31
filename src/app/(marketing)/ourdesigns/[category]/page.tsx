@@ -27,7 +27,7 @@ export const revalidate = 60; // Revalida cada 60 segundos
 const CATEGORY_MAP = {
   branding: { name: "Branding", slug: "branding" },
   digital: { name: "Digital", slug: "digital" },
-  impresion: { name: "Impresión", slug: "Impresion" },
+  impresion: { name: "Impresión", slug: "impresion" },
   eventos: { name: "Eventos", slug: "eventos" },
   packaging: { name: "Packaging", slug: "packaging" },
 };

@@ -1,8 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   images: {
-    domains: ["xfydgfoywlnkrxntjamw.supabase.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "xfydgfoywlnkrxntjamw.supabase.co",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+    ],
   },
 };
 

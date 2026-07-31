@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { TargetAndTransition } from "framer-motion";
 
 export const WhatsappButton = () => {
-  const phone = "";
+  const phone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE ?? "";
   const message =
     "¡Hola! Quisiera hacer una consulta sobre diseño gráfico u Pedido.";
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;

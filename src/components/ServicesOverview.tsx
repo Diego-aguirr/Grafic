@@ -2,7 +2,7 @@ import React from 'react';
 import { FaRegIdBadge, FaFilm, FaFilePdf, FaTicketAlt, FaRegImages } from 'react-icons/fa';
 import { MdOutlineVideoLibrary, MdDesignServices } from 'react-icons/md';
 import { GiPartyPopper } from 'react-icons/gi';
-import { overviewProps } from '@/interfaces/Overvie';
+import { overviewProps } from '@/interfaces/Overview';
 
 
 
